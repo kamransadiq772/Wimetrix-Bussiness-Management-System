@@ -1,0 +1,15 @@
+.active{
+    background-color: rgb(236, 236, 236);
+    color: #785EE0;
+    border-left: 10px solid #785EE0;
+}
+.active.spani{
+    visibility: visible;
+    background-color: gray;
+}
+.active div div svg{
+    color: #785EE0;
+}
+.active div div span{
+    color: #785EE0;
+}

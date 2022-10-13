@@ -1,0 +1,717 @@
+swagger: "2.0"
+info:
+  title: Wimetrix CRUD Sweager Docs
+  description : Swagger explainations for Routing Api
+  version : 1.0
+  contact :
+    email : kamransadiq772@gmail.com
+  servers : 
+    -url : http://localhost:4000/
+    description : Local Host Server
+    # -url : "http:company.com"
+    # description : Deployed Url
+
+schemes : [http, https]
+
+paths : 
+
+# line Routes
+
+  /api/line : 
+    get:
+      summary : Returns all line list
+      description : This takes just request(no parameter or body) and return list of fault controllers.
+      responses : 
+        200 :
+          description : Success
+          schema : 
+            type : array                          
+            # example : [{LineID : 1,ShiftID : 1,ShiftDate : 2022-09-06,OverTime : true,LineProduction : 4,LineEarnedSAM : 1122.5}]
+            items : 
+              type : object
+              properties : 
+                LineID :
+                  type : integer
+                LineCode :
+                  type : string
+                LineDescription :
+                  type : string
+                CreatedAt :
+                  type : string
+                UpdatedAt :
+                  type : string
+        500 :
+          description : "Internal Server Error"  
+    post:
+      summary : Create a new Line 
+      description : Route takes a parameters in body of request and create a new Line.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              LineCode : 
+                type : string
+                required : true
+              LineDescription :
+                type : string
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : any
+    put:
+      summary : Update a Line 
+      description : Route takes a parameters in body of request and update the Line.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              LineID : 
+                type : "integer"
+                required : true
+              LineCode : 
+                type : string
+                required : true
+              LineDescription :
+                type : string
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : object 
+  /api/line/{id} : 
+    delete:
+      summary : Delete a record by LineID
+      description : Route takes a LineID=? in path parameters and delete record of that id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : object 
+
+# fault Routes
+
+  /api/fault : 
+    get:
+      summary : Returns all faults list
+      description : This takes just request(no parameter or body) and return list of fault controllers.
+      responses : 
+        200 :
+          description : Success
+          schema : 
+            type : array                          
+            # example : [{LineID : 1,ShiftID : 1,ShiftDate : 2022-09-06,OverTime : true,LineProduction : 4,LineEarnedSAM : 1122.5}]
+            items : 
+              type : object
+              properties : 
+                FaultID :
+                  type : integer
+                FaultCode :
+                  type : string
+                FaultDescription :
+                  type : string
+                SectionID :
+                  type : integer
+                CreatedAt :
+                  type : string
+                UpdatedAt :
+                  type : string
+        500 :
+          description : "Internal Server Error"  
+    post:
+      summary : Create a new Fault 
+      description : Route takes a parameters in body of request and create a new fault.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              FaultCode : 
+                type : string
+                required : true
+              FaultDescription :
+                type : string
+                required : true
+              SectionID :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string
+    put:
+      summary : Update a Fault 
+      description : Route takes a parameters in body of request and update the fault.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              FaultID : 
+                type : "integer"
+                required : true
+              FaultCode : 
+                type : string
+                required : true
+              FaultDescription :
+                type : string
+                required : true
+              SectionID :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string 
+  /api/fault/{id} : 
+    delete:
+      summary : Delete a record by FaultID
+      description : Route takes a FaultID=? in path parameters and delete record of that id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string 
+          description : "Internal Server Error"
+
+# MachineType Routes
+
+  /api/machineType : 
+    get:
+      summary : Returns all Machine Types list
+      description : This takes just request(no parameter or body) and return list of MachineTypes.
+      responses : 
+        200 :
+          description : Success
+          schema : 
+            type : array                          
+            # example : [{LineID : 1,ShiftID : 1,ShiftDate : 2022-09-06,OverTime : true,LineProduction : 4,LineEarnedSAM : 1122.5}]
+            items : 
+              type : object
+              properties : 
+                MachineTypeID :
+                  type : integer
+                MachineTypeCode :
+                  type : string
+                MachineTypeDescription :
+                  type : string
+                Allowance :
+                  type : integer
+                  format : float
+                CreatedAt :
+                  type : string
+                UpdatedAt :
+                  type : string
+        500 :
+          description : "Internal Server Error"  
+    post:
+      summary : Create a new MachineType 
+      description : Route takes a parameters in body of request and create a new MachineType.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              MachineTypeCode : 
+                type : string
+                required : true
+              MachineTypeDescription :
+                type : string
+                required : true
+              Allowance :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string
+    put:
+      summary : Update a MachineType 
+      description : Route takes id and parameters in body of request and update the MachineType.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              MachineTypeID : 
+                type : "integer"
+                required : true
+              MachineTypeCode : 
+                type : string
+                required : true
+              MachineTypeDescription :
+                type : string
+                required : true
+              Allowance :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : object 
+  /api/machineType/{id} : 
+    delete:
+      summary : Delete a record by MachineTypeID
+      description : Route takes a MachineTypeID in path parameters and delete record of that id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string 
+          description : "Internal Server Error"
+
+# Machine Routes
+
+  /api/machine : 
+    get:
+      summary : Returns all machine list
+      description : This takes just request(no parameter or body) and return list of machines.
+      responses : 
+        200 :
+          description : Success
+          schema : 
+            type : array                          
+            # example : [{LineID : 1,ShiftID : 1,ShiftDate : 2022-09-06,OverTime : true,LineProduction : 4,LineEarnedSAM : 1122.5}]
+            items : 
+              type : object
+              properties : 
+                MachineID :
+                  type : integer
+                MachineCode :
+                  type : string
+                MachineDescription :
+                  type : string
+                MachineImageUrl :
+                  type : string
+                MachineThumbnailUrl :
+                  type : string
+                MachineTypeID :
+                  type : integer
+                ActiveWorkerID :
+                  type : integer
+                LineID :
+                  type : integer
+                BoxID :
+                  type : integer
+                IsMachineDown :
+                  type : integer
+                CreatedAt :
+                  type : string
+                UpdatedAt :
+                  type : string
+        500 :
+          description : "Internal Server Error"  
+    post:
+      summary : Create a new Machine 
+      description : Route takes a parameters in body of request and create a new machine.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              MachineCode : 
+                type : string
+                required : true
+              MachineDescription :
+                type : string
+                required : true
+              MachineImageUrl :
+                type : string
+                required : true
+              MachineThumbnailUrl :
+                type : string
+                required : true
+              MachineTypeID :
+                type : integer
+                required : true
+              ActiveWorkerID :
+                type : integer
+                required : true
+              LineID :
+                type : integer
+                required : true
+              BoxID :
+                type : integer
+                required : true
+              IsMachineDown :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string
+    put:
+      summary : Update a Machine 
+      description : Route takes a parameters in body of request and update the Machine.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties :               
+              MachineID : 
+                type : integer
+                required : true
+              MachineCode : 
+                type : string
+                required : true
+              MachineDescription :
+                type : string
+                required : true
+              MachineImageUrl :
+                type : string
+                required : true
+              MachineThumbnailUrl :
+                type : string
+                required : true
+              MachineTypeID :
+                type : integer
+                required : true
+              ActiveWorkerID :
+                type : integer
+                required : true
+              LineID :
+                type : integer
+                required : true
+              BoxID :
+                type : integer
+                required : true
+              IsMachineDown :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string 
+  /api/machine/{id} : 
+    delete:
+      summary : Delete a record by MachineID
+      description : Route takes a MachineID=? in path parameters and delete record of that id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string 
+          description : "Internal Server Error"
+
+# Worker Routes
+
+  /api/worker : 
+    get:
+      summary : Returns all worker list
+      description : This takes just request(no parameter or body) and return list of fault controllers.
+      responses : 
+        200 :
+          description : Success
+          schema : 
+            type : array                          
+            # example : [{LineID : 1,ShiftID : 1,ShiftDate : 2022-09-06,OverTime : true,LineProduction : 4,LineEarnedSAM : 1122.5}]
+            items : 
+              type : object
+              properties : 
+                WorkerID :
+                  type : integer
+                WorkerCode :
+                  type : string
+                WorkerDescription :
+                  type : string
+                WorkerImageUrl :
+                  type : string
+                WorkerThumbnailUrl :
+                  type : string
+                TodayCheckin :
+                  type : string
+                TodayProduction :
+                  type : integer
+                CreatedAt :
+                  type : string
+                UpdatedAt :
+                  type : string
+        500 :
+          description : "Internal Server Error"  
+    post:
+      summary : Create a new Worker 
+      description : Route takes a parameters in body of request and create a new Worker.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              WorkerCode : 
+                type : string
+                required : true
+              WorkerDescription :
+                type : string
+                required : true
+              WorkerImageUrl :
+                type : string
+                required : true
+              WorkerThumbnailUrl :
+                type : string
+                required : true
+              TodayCheckin :
+                type : string
+                required : true
+              TodayProduction :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string
+    put:
+      summary : Update a Worker 
+      description : Route takes a parameters in body of request and update the Worker.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters : 
+        - in : body
+          name : body
+          schema :
+            type : object
+            properties : 
+              WorkerID : 
+                type : "integer"
+                required : true
+              WorkerCode : 
+                type : string
+                required : true
+              WorkerDescription :
+                type : string
+              WorkerImageUrl :
+                type : string
+              WorkerThumbnailUrl :
+                type : string
+              TodayCheckin :
+                type : string
+              TodayProduction :  
+                type : integer
+                required : true
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string 
+  /api/worker/{id} : 
+    delete:
+      summary : Delete a record by WorkerID
+      description : Route takes a WorkerID in path parameters and delete record of that id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      responses : 
+        200 :
+          description : OK
+          schema : 
+            type : string           
+        400 : 
+          description : Missing fields
+          schema : 
+            type : string
+        500 :
+          description : "Internal Server Error"
+          schema : 
+            type : string 
+          description : "Internal Server Error"
+
